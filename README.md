@@ -7,11 +7,11 @@ Access Web3 and crypto intelligence via [Heurist Mesh](https://mesh.heurist.ai) 
 
 ## Quick Start
 
-Paste this into Claude Code, Cursor, or any AI coding agent:
+Paste this into Claude Code, Cursor, Codex, OpenClaw, or any AI agent that supports SKILL.md:
 
 > Clone https://github.com/heurist-network/heurist-mesh-skill, read SKILL.md, and help me query crypto data
 
-Claude reads the skill, fetches tool schemas, and starts making Mesh API calls on your behalf.
+The agent will read the skill, fetches tool schemas, and become a crypto analyst.
 
 ## Structure
 
@@ -36,7 +36,7 @@ heurist-mesh-skill/
 | **ChainbaseAddressLabelAgent** | EVM address labels (identity, ENS, wallet behavior) |
 | **ZerionWalletAnalysisAgent** | EVM wallet token and NFT holdings |
 | **ProjectKnowledgeAgent** | Crypto project database with semantic search |
-| **AskHeuristAgent** | Crypto Q&A and deep analysis |
+| **AskHeuristAgent** | Crypto Q&A and deep analysis (by https://ask.heurist.ai. This is recommended for any in-depth crypto analysis) |
 | **CaesarResearchAgent** | Academic paper search and analysis |
 
 ## Payment Options
