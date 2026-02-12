@@ -55,44 +55,62 @@ Add `&pricing=usd` to get prices in USD instead of credits. Returns each tool's 
 - `caesar_research` — Submit a research query for in-depth analysis
 - `get_research_result` — Retrieve research results by ID
 
-## Call a Tool
+## Setup (MUST complete before making any API calls)
 
-**Base URL:** `https://mesh.heurist.xyz`
+You need at least one payment method configured. **DO NOT call any Mesh tool APIs until setup is verified.**
 
-Example: 
+### Step 1: Choose a payment method
+
+**Option A: Heurist API Key (Recommended — simplest)**
+
+1. Get an API key via ONE of:
+   - Purchase credits at https://heurist.ai/credits
+   - Claim 100 free credits via tweet (see [references/heurist-api-key.md](references/heurist-api-key.md))
+2. Store the key in `.env` in the project root:
+   ```
+   HEURIST_API_KEY=your-api-key-here
+   ```
+3. All API calls use `Authorization: Bearer $HEURIST_API_KEY`
+
+**Option B: x402 On-Chain Payment (USDC on Base)**
+
+1. You need a wallet private key with USDC balance on Base.
+2. Store the key in `.env` in the project root:
+   ```
+   WALLET_PRIVATE_KEY=0x...your-private-key
+   ```
+3. See [references/x402-payment.md](references/x402-payment.md) for the payment flow.
+
+**Option C: Inflow Payment Platform** *(Coming soon)*
+
+See [references/inflow-payment.md](references/inflow-payment.md).
+
+### Step 2: Verify setup
+
+Check that credentials are configured before proceeding:
+
+- **API Key path:** Read `.env` and confirm `HEURIST_API_KEY` is set and non-empty.
+- **x402 path:** Read `.env` and confirm `WALLET_PRIVATE_KEY` is set, starts with `0x`, and is 66 characters.
+
+**If neither is configured, STOP and ask the user to set up a payment method. Do not make API calls without valid credentials.**
+
+### Step 3: Make API calls
+
+Once verified, use the credentials in requests:
+
+```bash
+# With API key
+curl -X POST https://mesh.heurist.xyz/mesh_request \
+  -H "Authorization: Bearer $HEURIST_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"agent_id": "TokenResolverAgent", "input": {"tool": "token_search", "tool_arguments": {"query": "ETH"}, "raw_data_only": true}}'
+
+# With x402 — call endpoint without payment header first, then complete payment flow
+# See references/x402-payment.md for details
 ```
-POST https://mesh.heurist.xyz/mesh_request
-Authorization: Bearer <api_key>
-Content-Type: application/json
 
-{
-  "agent_id": "TokenResolverAgent",
-  "input": {
-    "tool": "resolve_token",
-    "tool_arguments": {"symbol": "ETH"},
-    "raw_data_only": true
-  }
-}
-```
-
-## Advanced: Discover More Agents
+## Discover More Agents
 
 **All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
 
 **x402-enabled agents only:** Fetch `https://mesh.heurist.xyz/x402/agents` for agents supporting on-chain USDC payment on Base.
-
-## Payment Methods
-
-Three ways to pay for Mesh tool calls:
-
-### 1. Heurist API Key (credits)
-Prepaid credits deducted per tool call. Simplest option for getting started.
-See [references/heurist-api-key.md](references/heurist-api-key.md).
-
-### 2. x402 On-Chain Payment (USDC on Base)
-Pay-per-call with crypto. No account needed — just a wallet with USDC on Base.
-See [references/x402-payment.md](references/x402-payment.md).
-
-### 3. Inflow Payment Platform
-Agentic payment platform with user registration and approval flows.
-See [references/inflow-payment.md](references/inflow-payment.md). *(Coming soon)*
