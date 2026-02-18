@@ -1,6 +1,6 @@
 ---
-name: heurist-mesh
-description: Heurist Mesh provides AI agent tools for crypto and blockchain tasks via REST API. Use this skill when the user wants to (1) look up token prices, market data, or trending coins, (2) analyze a crypto project, wallet, or DeFi protocol, (3) search or read tweets/X posts about crypto, (4) search the web or research crypto topics, (5) get address labels or on-chain data, (6) discover Mesh agents/tools, call Mesh API endpoints, or understand payment options (API key credits, x402, Inflow). Triggers on: token price, market cap, trending tokens, wallet analysis, DeFi TVL, project info, Twitter/X search, web search, crypto research, Heurist, Mesh, and any blockchain/crypto data queries.
+name: heurist-mesh-skill
+description: Crypto and blockchain tools via Heurist Mesh REST API - token prices, DeFi analytics, wallet analysis, Twitter/X intelligence, web search.
 ---
 
 # Heurist Mesh
