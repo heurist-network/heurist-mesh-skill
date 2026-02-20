@@ -79,7 +79,7 @@ You need at least one payment method configured. **DO NOT call any Mesh tool API
    ```
    WALLET_PRIVATE_KEY=0x...your-private-key
    ```
-3. See [references/x402-payment.md](references/x402-payment.md) for the payment flow.
+3. See [references/x402-payment.md](references/x402-payment.md) for the payment flow using `cast` (Foundry).
 
 **Option C: Inflow Payment Platform** *(Coming soon)*
 
@@ -105,8 +105,8 @@ curl -X POST https://mesh.heurist.xyz/mesh_request \
   -H "Content-Type: application/json" \
   -d '{"agent_id": "TokenResolverAgent", "input": {"tool": "token_search", "tool_arguments": {"query": "ETH"}, "raw_data_only": true}}'
 
-# With x402 — call endpoint without payment header first, then complete payment flow
-# See references/x402-payment.md for details
+# With x402 — sign with cast (Foundry), no account or SDK needed
+# See references/x402-payment.md for the full cast-based flow and helper script
 ```
 
 ## Discover More Agents
