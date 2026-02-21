@@ -1,6 +1,13 @@
 # x402 On-Chain Payment
 
-Pay per tool call with USDC on Base. No account needed — just a private key with USDC balance and [`cast`](https://book.getfoundry.sh/getting-started/installation) from Foundry.
+Pay per tool call with USDC on Base. No account needed — just a private key with USDC balance and `cast` from Foundry.
+
+Install Foundry:
+
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
 
 ## Endpoint
 
@@ -14,7 +21,7 @@ Tool arguments go directly in the request body (no `tool`/`tool_arguments` wrapp
 
 ### 1. Probe endpoint
 
-POST without payment header → `402` with payment metadata:
+POST the endpoint without any body or header data. You will receive HTTP 402 with payment metadata. Example response:
 
 ```json
 {
@@ -36,7 +43,7 @@ POST without payment header → `402` with payment metadata:
 
 ```bash
 WALLET=$(cast wallet address --private-key "$PRIVATE_KEY")
-NONCE=$(python3 -c "import secrets; print('0x' + secrets.token_hex(32))")
+NONCE=0x$(openssl rand -hex 32)
 VALID_BEFORE=$(( $(date +%s) + 120 ))
 
 cat > /tmp/eip712.json << EOF
@@ -81,14 +88,8 @@ SIG=$(cast wallet sign --data --from-file --private-key "$PRIVATE_KEY" /tmp/eip7
 ### 3. Build `X-Payment` header and retry
 
 ```bash
-X_PAYMENT=$(python3 -c "
-import json, base64
-p = {'x402Version':1,'scheme':'exact','network':'base','payload':{
-  'signature':'$SIG',
-  'authorization':{'from':'$WALLET','to':'$PAY_TO','value':'$AMOUNT',
-    'validAfter':'0','validBefore':'$VALID_BEFORE','nonce':'$NONCE'}}}
-print(base64.b64encode(json.dumps(p).encode()).decode())
-")
+X_PAYMENT=$(printf '{"x402Version":1,"scheme":"exact","network":"base","payload":{"signature":"%s","authorization":{"from":"%s","to":"%s","value":"%s","validAfter":"0","validBefore":"%s","nonce":"%s"}}}' \
+  "$SIG" "$WALLET" "$PAY_TO" "$AMOUNT" "$VALID_BEFORE" "$NONCE" | base64 -w 0)
 
 curl -s -X POST "$URL" \
   -H "Content-Type: application/json" \
