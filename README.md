@@ -44,7 +44,7 @@ heurist-mesh-skill/
 
 1. **API Key (credits)** — Buy at [heurist.ai/credits](https://heurist.ai/credits) or claim 100 free credits via tweet
 2. **x402 (USDC on Base)** — Pay-per-call with crypto, no account needed
-3. **Inflow** — Coming soon
+3. **Inflow** — Agentic payment with https://www.inflowpay.ai
 
 ## Links
 
