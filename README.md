@@ -22,7 +22,7 @@ heurist-mesh-skill/
 └── references/
     ├── heurist-api-key.md            # Credit purchase, free tweet claim, API key auth
     ├── x402-payment.md               # On-chain USDC payment on Base
-    └── inflow-payment.md             # Placeholder for Inflow integration
+    └── inflow-payment.md             # Pay with Inflow (currently in testnet)
 ```
 
 ## Recommended Agents
@@ -38,7 +38,7 @@ heurist-mesh-skill/
 | **ZerionWalletAnalysisAgent** | EVM wallet token and NFT holdings |
 | **ProjectKnowledgeAgent** | Crypto project database with semantic search |
 | **AskHeuristAgent** | Crypto Q&A and deep analysis (by https://ask.heurist.ai. This is recommended for any in-depth crypto analysis) |
-| **CaesarResearchAgent** | Academic paper search and analysis |
+| **CaesarResearchAgent** | Expert-level agentic research |
 
 ## Payment Options
 
@@ -48,7 +48,7 @@ heurist-mesh-skill/
 
 ## Links
 
-- [Mesh Agent Explorer](https://mesh.heurist.ai)
+- [Heurist Mesh](https://mesh.heurist.ai)
 - [API Documentation](https://docs.heurist.ai)
 - [Telegram Support](https://t.me/heuristsupport)
 - [X / Twitter](https://x.com/heurist_ai)
