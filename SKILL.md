@@ -11,7 +11,7 @@ metadata:
 
 Heurist Mesh is an open network of modular AI agent tools for cryptocurrency and blockchain data. All features accessible via a unified REST API.
 
-### Recommended Agents and Tools
+## Recommended Agents and Tools
 
 **TrendingTokenAgent** — Trending tokens and market summary
 - `get_trending_tokens` — Get trending tokens most talked about and traded on CEXs and DEXs
