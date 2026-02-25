@@ -1,7 +1,7 @@
 ---
 name: heurist-mesh-skill
 description: Access real-time crypto token data, DeFi analytics, wallet intelligence, project research, and blockchain insights through Heurist Mesh agents. Use when the user asks about token trends, DeFi protocols, wallet holdings, project due diligence, Twitter/X crypto sentiment, or deeper market analysis.
-compatibility: Requires network access and one payment credential path (HEURIST_API_KEY, WALLET_PRIVATE_KEY, or INFLOW_USER_ID and INFLOW_PRIVATE_KEY).
+compatibility: Requires network access and curl or equivalent HTTP client.
 metadata:
   author: heurist-network
   docs: https://docs.heurist.ai
@@ -79,14 +79,14 @@ At least one payment path must be configured. Do not call Mesh APIs until setup 
 - x402 path: `WALLET_PRIVATE_KEY` is set, starts with `0x`, and is 66 characters
 - Inflow path: `INFLOW_USER_ID` and `INFLOW_PRIVATE_KEY` are set and non-empty
 
-If none are configured, stop and ask the user to finish payment setup before any API call.
+**If none are configured, STOP and ask the user to set up a payment method. Do not make API calls without valid credentials.**
 
 ### Step 3: Fetch schema before tool calls
 
 Use `mesh_schema` to confirm parameter names, required fields, and pricing before calling any tool:
 
 ```
-GET https://mesh.heurist.xyz/mesh_schema?agent_id=TokenResolverAgent&agent_id=CoinGeckoTokenInfoAgent
+GET https://mesh.heurist.xyz/mesh_schema?agent_id=TokenResolverAgent&agent_id=TrendingTokenAgent
 ```
 
 Default pricing is in credits (`1 credit = $0.01`). Add `&pricing=usd` for USD-denominated prices with x402 or Inflow.

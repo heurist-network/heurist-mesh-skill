@@ -32,7 +32,8 @@ heurist-mesh-skill/
 └── references/
     ├── heurist-api-key.md            # Credit purchase, free tweet claim, API key auth
     ├── x402-payment.md               # On-chain USDC payment on Base
-    └── inflow-payment.md             # Pay with Inflow (currently in testnet)
+    ├── inflow-payment.md             # Pay with Inflow (currently in testnet)
+    └── discover-agents.md            # Full agent registry discovery workflow
 ```
 
 ## Recommended Agents
