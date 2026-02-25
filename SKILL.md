@@ -9,7 +9,7 @@ metadata:
 
 # Heurist Mesh
 
-Heurist Mesh is an open network of modular AI agent tools for cryptocurrency and blockchain data. All features accessible via a unified REST API.
+Heurist Mesh is an open network of modular AI agent tools for cryptocurrency and blockchain data, accessible via a unified REST API.
 
 ## When to Use
 
@@ -83,7 +83,7 @@ At least one payment path must be configured. Do not call Mesh APIs until setup 
 
 ### Step 3: Fetch schema before tool calls
 
-Use `mesh_schema` to confirm parameter names, required fields, and pricing before calling any tool:
+Use `mesh_schema` to confirm parameter names, required fields, and pricing before calling any tool. Cache the result per agent for the session — schemas do not change between calls:
 
 ```
 GET https://mesh.heurist.xyz/mesh_schema?agent_id=TokenResolverAgent&agent_id=TrendingTokenAgent
