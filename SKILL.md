@@ -98,16 +98,11 @@ Then use configured credentials in requests:
 curl -X POST https://mesh.heurist.xyz/mesh_request \
   -H "Authorization: Bearer $HEURIST_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"agent_id": "TokenResolverAgent", "input": {"tool": "token_search", "tool_arguments": {"query": "ETH"}, "raw_data_only": true}}'
+  -d '{"agent_id": "TokenResolverAgent", "input": {"tool": "token_search", "tool_arguments": {"query": "ETH"}}}'
 
 # With x402 — sign with cast (Foundry), no account or SDK needed
 # See references/x402-payment.md for the full cast-based flow and helper script
 ```
-
-`raw_data_only` usage:
-
-- Use `raw_data_only: true` when the user asks for direct machine-readable payloads or downstream parsing
-- Use `raw_data_only: false` (or omit) when the user asks for interpreted prose from the agent
 
 ## Examples
 
@@ -116,37 +111,15 @@ curl -X POST https://mesh.heurist.xyz/mesh_request \
 User asks: "What tokens are trending right now?"
 
 1. Fetch schema: `GET /mesh_schema?agent_id=TrendingTokenAgent`
-2. Call tool: `TrendingTokenAgent.get_trending_tokens` with `raw_data_only: true`
+2. Call tool: `TrendingTokenAgent.get_trending_tokens`
 3. Return top tokens with key metrics, then summarize notable moves
 
-### Example 2: Token profile lookup
-
-User asks: "Analyze ETH setup."
-
-1. Fetch schema: `GET /mesh_schema?agent_id=TokenResolverAgent`
-2. Resolve candidate: `TokenResolverAgent.token_search` with `query: "ETH"`
-3. If ambiguous, ask user which candidate they mean; otherwise call `TokenResolverAgent.token_profile`
-
-### Example 3: Deep market question
+### Example 2: Deep market question
 
 User asks: "Give me a deep view on current market risk and opportunity."
 
-1. Gather fresh context with `TrendingTokenAgent.get_market_summary`
-2. Run `AskHeuristAgent.ask_heurist` with the user question plus gathered context
-3. If asynchronous, poll with `AskHeuristAgent.check_job_status` until complete
-
-## Multi-Agent Workflow
-
-For broad research requests, use this sequence and track progress:
-
-```
-Research Progress:
-- [ ] Step 1: Resolve entities (token/project/wallet) with TokenResolverAgent or ProjectKnowledgeAgent
-- [ ] Step 2: Pull market + DeFi context with TrendingTokenAgent and DefiLlamaAgent
-- [ ] Step 3: Pull social context with TwitterIntelligenceAgent
-- [ ] Step 4: Synthesize with AskHeuristAgent or CaesarResearchAgent
-- [ ] Step 5: Return a structured answer with assumptions and confidence
-```
+1. Run `AskHeuristAgent.ask_heurist` with the user question using deep mode
+2. Poll with `AskHeuristAgent.check_job_status` until complete
 
 ## Error Handling
 
