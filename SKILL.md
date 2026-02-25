@@ -109,6 +109,32 @@ curl -X POST https://mesh.heurist.xyz/mesh_request \
 - Use `raw_data_only: true` when the user asks for direct machine-readable payloads or downstream parsing
 - Use `raw_data_only: false` (or omit) when the user asks for interpreted prose from the agent
 
+## Examples
+
+### Example 1: Trending tokens
+
+User asks: "What tokens are trending right now?"
+
+1. Fetch schema: `GET /mesh_schema?agent_id=TrendingTokenAgent`
+2. Call tool: `TrendingTokenAgent.get_trending_tokens` with `raw_data_only: true`
+3. Return top tokens with key metrics, then summarize notable moves
+
+### Example 2: Token profile lookup
+
+User asks: "Analyze ETH setup."
+
+1. Fetch schema: `GET /mesh_schema?agent_id=TokenResolverAgent`
+2. Resolve candidate: `TokenResolverAgent.token_search` with `query: "ETH"`
+3. If ambiguous, ask user which candidate they mean; otherwise call `TokenResolverAgent.token_profile`
+
+### Example 3: Deep market question
+
+User asks: "Give me a deep view on current market risk and opportunity."
+
+1. Gather fresh context with `TrendingTokenAgent.get_market_summary`
+2. Run `AskHeuristAgent.ask_heurist` with the user question plus gathered context
+3. If asynchronous, poll with `AskHeuristAgent.check_job_status` until complete
+
 ## Discover More Agents
 
 **All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
