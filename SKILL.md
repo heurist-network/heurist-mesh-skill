@@ -104,6 +104,11 @@ curl -X POST https://mesh.heurist.xyz/mesh_request \
 # See references/x402-payment.md for the full cast-based flow and helper script
 ```
 
+`raw_data_only` usage:
+
+- Use `raw_data_only: true` when the user asks for direct machine-readable payloads or downstream parsing
+- Use `raw_data_only: false` (or omit) when the user asks for interpreted prose from the agent
+
 ## Discover More Agents
 
 **All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
