@@ -1,6 +1,6 @@
 ---
 name: heurist-mesh-skill
-description: Real-time crypto token data, DeFi analytics, blockchain data, Twitter/X social intelligence, enhanced web search, crypto project search all in one Skill. For in-depths topics, "Ask Heurist" agent can handle market trends, trading strategies, macro news, and deep research.
+description: Access real-time crypto token data, DeFi analytics, wallet intelligence, project research, and blockchain insights through Heurist Mesh agents. Use when the user asks about token trends, DeFi protocols, wallet holdings, project due diligence, Twitter/X crypto sentiment, or deeper market analysis.
 ---
 
 # Heurist Mesh
