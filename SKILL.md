@@ -158,6 +158,7 @@ Research Progress:
 
 ## Discover More Agents
 
-**All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
+For full agent discovery workflow and examples, see [references/discover-agents.md](references/discover-agents.md).
 
-**x402-enabled agents only:** Fetch `https://mesh.heurist.xyz/x402/agents` for agents supporting on-chain USDC payment on Base.
+- All agents: `https://mesh.heurist.ai/metadata.json`
+- x402-enabled agents: `https://mesh.heurist.xyz/x402/agents`
