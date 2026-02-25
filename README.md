@@ -8,11 +8,21 @@ Access Web3 and crypto intelligence via [Heurist Mesh](https://mesh.heurist.ai) 
 
 ## Quick Start
 
-Paste this into Claude Code, Cursor, Codex, OpenClaw, or any AI agent that supports SKILL.md:
+### Install via Skills CLI (Recommended)
+
+```bash
+npx skills add heurist-network/heurist-mesh-skill
+```
+
+This works with Claude Code, OpenCode, Cursor, Codex, Cline, Windsurf, and [37+ other agents](https://github.com/vercel-labs/skills#supported-agents).
+
+### Manual
+
+Paste this into any AI agent that supports SKILL.md:
 
 > Clone https://github.com/heurist-network/heurist-mesh-skill, read SKILL.md, and help me query crypto data
 
-The agent will read the skill, fetches tool schemas, and become a crypto analyst.
+The agent will read the skill, fetch tool schemas, and become a crypto analyst.
 
 ## Structure
 
@@ -22,7 +32,8 @@ heurist-mesh-skill/
 └── references/
     ├── heurist-api-key.md            # Credit purchase, free tweet claim, API key auth
     ├── x402-payment.md               # On-chain USDC payment on Base
-    └── inflow-payment.md             # Pay with Inflow (currently in testnet)
+    ├── inflow-payment.md             # Pay with Inflow (currently in testnet)
+    └── discover-agents.md            # Full agent registry discovery workflow
 ```
 
 ## Recommended Agents
