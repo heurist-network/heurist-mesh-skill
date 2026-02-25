@@ -11,6 +11,16 @@ metadata:
 
 Heurist Mesh is an open network of modular AI agent tools for cryptocurrency and blockchain data. All features accessible via a unified REST API.
 
+## When to Use
+
+Use this skill when the user asks for crypto or Web3 intelligence that benefits from live data retrieval, including:
+
+- Token discovery, trending pairs, and market snapshots
+- DeFi protocol metrics, chain-level activity, and revenue/TVL comparisons
+- Wallet holdings, address labels, or NFT portfolio lookups
+- Twitter/X signal checks, project due diligence, and ecosystem research
+- Deeper market questions that should escalate to `AskHeuristAgent`
+
 ## Recommended Agents and Tools
 
 **TrendingTokenAgent** — Trending tokens and market summary
