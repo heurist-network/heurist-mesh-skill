@@ -63,64 +63,35 @@ Use this skill when the user asks for crypto or Web3 intelligence that benefits 
 - `ask_heurist` — Submit a crypto question (normal or deep analysis mode)
 - `check_job_status` — Check status of a pending analysis job
 
-## Setup (MUST complete before making any API calls)
+## Setup (must complete before making API calls)
 
-You need at least one payment method configured. **DO NOT call any Mesh tool APIs until setup is verified.**
+At least one payment path must be configured. Do not call Mesh APIs until setup is verified.
 
-### Step 1: Choose a payment method
+### Step 1: Choose one payment path
 
-**Option A: Heurist API Key (Recommended — simplest)**
+- **API key (recommended):** Set `HEURIST_API_KEY` in `.env`. Setup and free-credit flow: [references/heurist-api-key.md](references/heurist-api-key.md)
+- **x402 on Base:** Set `WALLET_PRIVATE_KEY` in `.env`. Signed payment flow: [references/x402-payment.md](references/x402-payment.md)
+- **Inflow:** Set `INFLOW_USER_ID` and `INFLOW_PRIVATE_KEY` in `.env`. Buyer setup and approval flow: [references/inflow-payment.md](references/inflow-payment.md)
 
-1. Get an API key via ONE of:
-   - Purchase credits at https://heurist.ai/credits
-   - OR Claim 100 free credits via tweet (see [references/heurist-api-key.md](references/heurist-api-key.md))
-2. Store the key in `.env` in the project root:
-   ```
-   HEURIST_API_KEY=your-api-key-here
-   ```
-3. All API calls use `Authorization: Bearer $HEURIST_API_KEY`
+### Step 2: Verify setup in `.env`
 
-**Option B: x402 On-Chain Payment (USDC on Base)**
+- API key path: `HEURIST_API_KEY` is set and non-empty
+- x402 path: `WALLET_PRIVATE_KEY` is set, starts with `0x`, and is 66 characters
+- Inflow path: `INFLOW_USER_ID` and `INFLOW_PRIVATE_KEY` are set and non-empty
 
-1. You need a wallet private key with USDC balance on Base.
-2. Store the key in `.env` in the project root:
-   ```
-   WALLET_PRIVATE_KEY=0x...your-private-key
-   ```
-3. See [references/x402-payment.md](references/x402-payment.md) for the payment flow using `cast` (Foundry).
+If none are configured, stop and ask the user to finish payment setup before any API call.
 
-**Option C: Inflow Payment Platform (USDC via Inflow)**
+### Step 3: Fetch schema before tool calls
 
-1. If you already have Inflow credentials, store them in `.env`:
-   ```
-   INFLOW_USER_ID=your-buyer-user-id
-   INFLOW_PRIVATE_KEY=your-buyer-private-key
-   ```
-2. If not, create a buyer account and attach email — see [references/inflow-payment.md](references/inflow-payment.md) for one-time setup.
-3. Inflow uses a two-call payment flow (create request → user approves → execute). See [references/inflow-payment.md](references/inflow-payment.md) for the full flow.
-
-### Step 2: Verify setup
-
-Check that credentials are configured before proceeding:
-
-- **API Key path:** Read `.env` and confirm `HEURIST_API_KEY` is set and non-empty.
-- **x402 path:** Read `.env` and confirm `WALLET_PRIVATE_KEY` is set, starts with `0x`, and is 66 characters.
-- **Inflow path:** Read `.env` and confirm `INFLOW_USER_ID` and `INFLOW_PRIVATE_KEY` are set and non-empty.
-
-**If neither is configured, STOP and ask the user to set up a payment method. Do not make API calls without valid credentials.**
-
-### Step 3: Make API calls
-
-Once you have either Heurist API key or x402 wallet private key or Inflow key, you can make API calls. You should understand the tool schema and the parameters of tools you want before calling it.
-
-To fetch tool schema, use `mesh_schema` API:
+Use `mesh_schema` to confirm parameter names, required fields, and pricing before calling any tool:
 
 ```
 GET https://mesh.heurist.xyz/mesh_schema?agent_id=TokenResolverAgent&agent_id=CoinGeckoTokenInfoAgent
 ```
-Default pricing is in credits. 1 credit worth $0.01. Add `&pricing=usd` to get prices in USD instead of credits when using x402 or Inflow. Returns each tool's parameters (name, type, description, required/optional) and per-tool price.
 
-Then use the credentials in requests:
+Default pricing is in credits (`1 credit = $0.01`). Add `&pricing=usd` for USD-denominated prices with x402 or Inflow.
+
+Then use configured credentials in requests:
 
 ```bash
 # With API key
