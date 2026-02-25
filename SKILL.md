@@ -148,6 +148,14 @@ Research Progress:
 - [ ] Step 5: Return a structured answer with assumptions and confidence
 ```
 
+## Error Handling
+
+- `401`/`403`: Treat as credential issue; ask user to re-check `.env` values and do not continue calls with the same secret
+- `402`: Payment required; follow the selected payment path (`HEURIST_API_KEY`, x402 flow, or Inflow approval)
+- `status: "payment_pending"` (Inflow): ask for approval status, then retry with backoff
+- `429` or `5xx`: retry with exponential backoff and cap retries before surfacing failure details
+- Ambiguous `token_search` results: request user disambiguation before calling expensive downstream tools
+
 ## Discover More Agents
 
 **All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
