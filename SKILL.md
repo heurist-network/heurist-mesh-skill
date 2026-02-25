@@ -1,6 +1,10 @@
 ---
 name: heurist-mesh-skill
 description: Access real-time crypto token data, DeFi analytics, wallet intelligence, project research, and blockchain insights through Heurist Mesh agents. Use when the user asks about token trends, DeFi protocols, wallet holdings, project due diligence, Twitter/X crypto sentiment, or deeper market analysis.
+compatibility: Requires network access and one payment credential path (HEURIST_API_KEY, WALLET_PRIVATE_KEY, or INFLOW_USER_ID and INFLOW_PRIVATE_KEY).
+metadata:
+  author: heurist-network
+  docs: https://docs.heurist.ai
 ---
 
 # Heurist Mesh
