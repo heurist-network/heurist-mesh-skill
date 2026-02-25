@@ -135,6 +135,19 @@ User asks: "Give me a deep view on current market risk and opportunity."
 2. Run `AskHeuristAgent.ask_heurist` with the user question plus gathered context
 3. If asynchronous, poll with `AskHeuristAgent.check_job_status` until complete
 
+## Multi-Agent Workflow
+
+For broad research requests, use this sequence and track progress:
+
+```
+Research Progress:
+- [ ] Step 1: Resolve entities (token/project/wallet) with TokenResolverAgent or ProjectKnowledgeAgent
+- [ ] Step 2: Pull market + DeFi context with TrendingTokenAgent and DefiLlamaAgent
+- [ ] Step 3: Pull social context with TwitterIntelligenceAgent
+- [ ] Step 4: Synthesize with AskHeuristAgent or CaesarResearchAgent
+- [ ] Step 5: Return a structured answer with assumptions and confidence
+```
+
 ## Discover More Agents
 
 **All agents:** Fetch `https://mesh.heurist.ai/metadata.json` for the full registry. We have 30+ specialized crypto analytics agents covering use cases such as: reading address transaction history, reading transaction details from hash, tracing USDC on Base, detailed Coingecko data, Firecrawl scraping, GoPlus security screening, checking Twitter account influence via Moni, using SQL to query blockchain data, etc.
