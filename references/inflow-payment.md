@@ -79,7 +79,7 @@ Optional status check:
 
 ```bash
 curl -sS -H "X-API-Key: $INFLOW_PRIVATE_KEY" \
-  "https://sandbox.inflowpay.ai/v1/requests/<REQUEST_ID>"
+  "https://app.inflowpay.ai/v1/requests/<REQUEST_ID>"
 ```
 
 ### Step 3: Second call — execute with same payload
